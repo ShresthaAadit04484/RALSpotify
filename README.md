@@ -5,11 +5,11 @@ RALSpotify is a feature-rich music streaming platform built with Java and Spring
 - [Features](#features-🚀)
 - [Tech Stack](#tech-stack-🛠️)
 - [Getting Started](#get-started-💻)
-Project Structure
-API Endpoints
-Future Enhancements
-Contributing
-License
+- [Project Structure](#project-structure-📂)
+- [API Endpoints](#api-endpoints-📬)
+- [Future Enhancements](#future-enhancements-🔮)
+- [Contributing](#contributing-🤝)
+
 
 ## Features 🚀
 - **User Management:** Signup, login, and role-based authentication.
