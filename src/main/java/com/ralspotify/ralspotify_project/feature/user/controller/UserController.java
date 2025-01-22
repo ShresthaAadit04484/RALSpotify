@@ -8,7 +8,8 @@ import com.ralspotify.ralspotify_project.feature.user.model.User;
 import com.ralspotify.ralspotify_project.feature.song.model.Song;
 import com.ralspotify.ralspotify_project.feature.user.service.UserService;
 import java.util.List;
-
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -33,6 +34,16 @@ public class UserController {
         return ResponseEntity.ok(savedUser); 
     }
 
+    @PostMapping("/signup")
+    public ResponseEntity<User> signUpUser(@RequestBody User user) {
+        if (user.getRoles() == null || user.getRoles().isEmpty()){
+            user.setRoles(List.of(Roles.ROLE_USER));
+        }
+        
+        User registeredUser = userService.saveUser(user);
+        return ResponseEntity.ok(registeredUser);
+    }
+    
     //Get User by ID
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id){

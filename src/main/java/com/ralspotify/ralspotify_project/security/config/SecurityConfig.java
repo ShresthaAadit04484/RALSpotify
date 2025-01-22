@@ -29,7 +29,7 @@ public class SecurityConfig {
         return http
                 .csrf(customizer -> customizer.disable())
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/api/users").permitAll()
+                        .requestMatchers("/signup").permitAll()
                         .anyRequest().authenticated()
                 )
                 // http.formLogin(Customizer.withDefaults()); //For web browser to login
