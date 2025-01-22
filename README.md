@@ -1,6 +1,8 @@
 # RALSpotify
 RALSpotify is a feature-rich music streaming platform built with Java and Spring Boot. It allows users to manage playlists, explore songs, and experience seamless integration with Spotify's APIs.
 
+The latest is in the dev1 branch.
+
 # Table of Contents
 - [Features](#features-🚀)
 - [Tech Stack](#tech-stack-🛠️)
@@ -36,9 +38,10 @@ Follow these steps to set up the project on your local machine:
 - Spotify API credentials (How to Get Credentials)
 
 ## Installation
+The latest is in the dev1 branch.
 ### Clone the repository:
 ```bash
-git clone https://github.com/your-username/RALSpotify.git
+git clone https://github.com/ShresthaAadit04484/RALSpotify.git
 ```
 
 ### Navigate to the project directory:
