@@ -93,8 +93,8 @@ src/main/java/com/ralspotify/ralspotify_project
 
 | **Method** | **Endpoint**          | **Description**           |
 |------------|-----------------------|---------------------------|
-| POST       | `/api/auth/signup`    | Register a new user.      |
-| POST       | `/api/auth`           | Authenticate user.        |
+| POST       | `/api/users/signup`   | Register a new user.      |
+| POST       | `/api/users`          | Authenticate user.        |
 
 ---
 
@@ -102,16 +102,16 @@ src/main/java/com/ralspotify/ralspotify_project
 
 | **Method** | **Endpoint**          | **Description**           |
 |------------|-----------------------|---------------------------|
-| GET        | `/api/playlists`      | Fetch all playlists.      |
-| POST       | `/api/playlists`      | Create a new playlist.    |
+| GET        | `/api/playlist`       | Fetch all playlists.      |
+| POST       | `/api/playlist`       | Create a new playlist.    |
 
 ---
 #### **Songs**
 
 | **Method** | **Endpoint**          | **Description**           |
 |------------|-----------------------|---------------------------|
-| GET        | `/api/playlists`      | Fetch all playlists.      |
-| POST      | `/api/playlists`      | Create a new playlist.    |
+| GET        | `/api/song`           | Fetch all playlists.      |
+| POST       | `/api/song`           | Create a new playlist.    |
 
 ---
 
