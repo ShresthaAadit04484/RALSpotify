@@ -43,6 +43,11 @@ public class UserController {
         User registeredUser = userService.saveUser(user);
         return ResponseEntity.ok(registeredUser);
     }
+
+    @PostMapping("/login")
+    public String login(@RequestBody User user){
+        return "Success";
+    }
     
     //Get User by ID
     @GetMapping("/{id}")
