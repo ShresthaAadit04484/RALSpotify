@@ -28,20 +28,30 @@ public class JwtTokenFilter extends OncePerRequestFilter{
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = extractToken(request);
-        if (token != null && jwtTokenProvider.validateToken(token, (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal())){
+        
+        if(token != null){
             String username = jwtTokenProvider.extractUsername(token);
-            UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            
+            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null){
+                UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
+               
+                if (jwtTokenProvider.validateToken(token, userDetails)) {
+                    UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                
+                    System.out.println("Authentication Successful for User: " + username); // Debugging
+                }
+            }
         }
+        
         filterChain.doFilter(request, response);
     }
 
     private String extractToken(HttpServletRequest request){
-        String bearerToken = request.getHeader("Authorization");
-        if (bearerToken != null && bearerToken.startsWith("Bearer ")){
-            return bearerToken.substring(7);
+        String authHeader = request.getHeader("Authorization");
+        if (authHeader != null && authHeader.startsWith("Bearer ")){
+            return authHeader.substring(7);
         }
         return null;
     }
