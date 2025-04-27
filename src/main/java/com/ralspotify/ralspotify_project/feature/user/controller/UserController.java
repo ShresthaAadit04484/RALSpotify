@@ -3,11 +3,11 @@ package com.ralspotify.ralspotify_project.feature.user.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.ralspotify.ralspotify_project.feature.user.model.Roles;
 import com.ralspotify.ralspotify_project.feature.user.model.User;
 import com.ralspotify.ralspotify_project.feature.song.model.Song;
 import com.ralspotify.ralspotify_project.feature.user.service.UserService;
 import java.util.List;
-import org.springframework.web.bind.annotation.GetMapping;
 
 
 
@@ -25,6 +25,10 @@ public class UserController {
     //Create or Update User    
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user){
+        if (user.getRoles() == null || user.getRoles().isEmpty()) {
+            user.setRoles(List.of(Roles.ROLE_USER)); // Assign default role
+        }
+
         User savedUser = userService.saveUser(user);
         return ResponseEntity.ok(savedUser); 
     }
