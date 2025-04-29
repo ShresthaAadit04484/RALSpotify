@@ -8,9 +8,11 @@ import com.ralspotify.ralspotify_project.feature.playlist.model.Playlist;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -50,6 +52,16 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Playlist> playlists = new ArrayList<>();
     
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING) // Map roles as strings in the database
+    private List<Roles> roles = new ArrayList<>();
+
+
+    private boolean active = true;
+    private boolean locked = false;
+
+
     //Constructors
     public User(){
         super();
@@ -124,4 +136,29 @@ public class User {
     public void setFavouriteSongs(List<Song> favouriteSongs){
         this.favouriteSongs = favouriteSongs;
     }
+
+    public List<Roles> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Roles> roles){
+        this.roles = roles;
+    }
+
+    public boolean isActive(){
+        return active;
+    }
+
+    public void setActive(boolean active){
+        this.active = active;
+    }
+
+    public boolean isLocked(){
+        return locked;
+    }
+
+    public void setLocked(boolean locked){
+        this.locked = locked;
+    }
+
 }

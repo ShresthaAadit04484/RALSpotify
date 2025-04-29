@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import com.ralspotify.ralspotify_project.feature.user.model.User;
 import com.ralspotify.ralspotify_project.feature.user.repository.UserRepository;
+// import com.ralspotify.ralspotify_project.security.config.SecurityConfig;
+import org.springframework.security.crypto.password.PasswordEncoder;
+// import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.ralspotify.ralspotify_project.feature.song.model.Song;
 import com.ralspotify.ralspotify_project.feature.song.service.SongService;
@@ -12,14 +15,21 @@ import com.ralspotify.ralspotify_project.feature.song.service.SongService;
 public class UserService {
     private final UserRepository userRepo;
     private final SongService songService;
+    private final PasswordEncoder passwordEncoder;
+    // private final BCryptPasswordEncoder passwordEncoder;
     
-    public UserService(UserRepository userRepo, SongService songService){
+    public UserService(UserRepository userRepo, SongService songService, PasswordEncoder passwordEncoder){
         this.userRepo = userRepo;
         this.songService = songService;
+        this.passwordEncoder = passwordEncoder;
+        // this.passwordEncoder = passwordEncoder;
     }
 
     //Create or Update User
     public User saveUser(User user){
+        //Encrypt Password Before Saving
+        String encyrptedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encyrptedPassword);
         return userRepo.save(user);
     }
 
@@ -64,4 +74,6 @@ public class UserService {
         user.getFavouriteSongs().remove(song);
         return userRepo.save(user);
     } 
+
+
 }
